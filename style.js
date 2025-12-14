@@ -4,15 +4,23 @@ const centeredMessageInput = document.getElementById('centeredMessageInput');
 const sendButton = document.getElementById('sendButton');
 const centeredSendButton = document.getElementById('centeredSendButton');
 const newChatButton = document.getElementById('newChatButton');
-const userAccountButton = document.getElementById('userAccountButton');
+const footerSettingsButton = document.getElementById('footerSettingsButton');
 const menuToggle = document.getElementById('menuToggle');
 const sidebar = document.getElementById('sidebar');
 const sidebarOverlay = document.getElementById('sidebarOverlay');
 const welcomeContainer = document.getElementById('welcomeContainer');
 const chatContainer = document.getElementById('chatContainer');
 const searchInput = document.getElementById('searchInput');
+const formsButton = document.getElementById('formsButton');
+const formsSubmenu = document.getElementById('formsSubmenu');
+const contractsButton = document.getElementById('contractsButton');
+const risksButton = document.getElementById('risksButton');
+const chatHistoryList = document.getElementById('chatHistoryList');
+const sidebarLogo = document.getElementById('sidebarLogo');
+const welcomeTitle = document.getElementById('welcomeTitle');
 
 let messages = [];
+let chatSessions = [];
 let isFirstMessage = true;
 let isLoggedIn = false;
 
@@ -24,6 +32,16 @@ const aiResponses = [
     "منظور مثير للاهتمام! دعني أحلل هذا لك مع بعض الرؤى الأساسية والخطوات القابلة للتنفيذ."
 ];
 
+const welcomeTitles = [
+    "كيف يمكنني مساعدتك",
+    "مرحباً بك في المساعد الذكي",
+    "حيّاك الله، كيف أقدر أخدمك اليوم",
+    "أهلًا، أنا موجود للمساعدة بأي وقت",
+    "حيّاك الله، يسعدني خدمتك",
+    "هلا بك، جاهز أساعدك بأي شي تحتاجه",
+    "كيف أقدر أخدمك"
+];
+
 menuToggle.addEventListener('click', () => {
     sidebar.classList.toggle('open');
     sidebarOverlay.classList.toggle('active');
@@ -32,6 +50,21 @@ menuToggle.addEventListener('click', () => {
 sidebarOverlay.addEventListener('click', () => {
     sidebar.classList.remove('open');
     sidebarOverlay.classList.remove('active');
+});
+
+sidebarLogo.addEventListener('click', () => {
+    const randomTitle = welcomeTitles[Math.floor(Math.random() * welcomeTitles.length)];
+    welcomeTitle.textContent = randomTitle;
+
+    welcomeTitle.style.animation = 'none';
+    setTimeout(() => {
+        welcomeTitle.style.animation = 'fadeIn 0.5s ease';
+    }, 10);
+
+    if (window.innerWidth <= 768) {
+        sidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('active');
+    }
 });
 
 function addMessage(content, isUser) {
@@ -72,15 +105,65 @@ function sendMessage(inputElement) {
     if (isFirstMessage) {
         transitionToChat();
         isFirstMessage = false;
+
+        const sessionTitle = message.length > 40 ? message.substring(0, 40) + '...' : message;
+        chatSessions.unshift({
+            title: sessionTitle,
+            timestamp: new Date(),
+            messages: []
+        });
+        updateChatHistory();
     }
 
     addMessage(message, true);
+
+    if (chatSessions.length > 0) {
+        chatSessions[0].messages.push({ content: message, isUser: true });
+    }
+
     inputElement.value = '';
 
     setTimeout(() => {
         const aiResponse = getAIResponse();
         addMessage(aiResponse, false);
+
+        if (chatSessions.length > 0) {
+            chatSessions[0].messages.push({ content: aiResponse, isUser: false });
+        }
     }, 800);
+}
+
+function updateChatHistory() {
+    chatHistoryList.innerHTML = '';
+
+    chatSessions.forEach((session, index) => {
+        const historyItem = document.createElement('div');
+        historyItem.className = 'chat-history-item';
+        historyItem.innerHTML = `<span>${session.title}</span>`;
+        historyItem.addEventListener('click', () => {
+            loadChatSession(index);
+            if (window.innerWidth <= 768) {
+                sidebar.classList.remove('open');
+                sidebarOverlay.classList.remove('active');
+            }
+        });
+        chatHistoryList.appendChild(historyItem);
+    });
+}
+
+function loadChatSession(index) {
+    const session = chatSessions[index];
+    chatArea.innerHTML = '';
+    messages = [];
+
+    session.messages.forEach(msg => {
+        addMessage(msg.content, msg.isUser);
+    });
+
+    if (session.messages.length > 0) {
+        welcomeContainer.classList.add('hidden');
+        chatContainer.classList.add('active');
+    }
 }
 
 centeredSendButton.addEventListener('click', () => {
@@ -119,33 +202,38 @@ newChatButton.addEventListener('click', () => {
     }
 });
 
-userAccountButton.addEventListener('click', () => {
-    if (!isLoggedIn) {
-        alert('تسجيل الدخول / إنشاء حساب\n\nهنا يمكن للمستخدم:\n• تسجيل الدخول إلى حسابه\n• إنشاء حساب جديد\n• إدارة إعداداته\n• عرض اشتراكاته');
-    } else {
-        alert('إعدادات الحساب\n\n• الملف الشخصي\n• الاشتراكات\n• الإعدادات\n• تسجيل الخروج');
-    }
-    
+footerSettingsButton.addEventListener('click', () => {
+    alert('إعدادات الحساب\n\n• الملف الشخصي\n• الاشتراكات\n• الإعدادات\n• تسجيل الخروج');
+
     if (window.innerWidth <= 768) {
         sidebar.classList.remove('open');
         sidebarOverlay.classList.remove('active');
     }
 });
 
-document.querySelectorAll('.chat-history-item').forEach(item => {
-    item.addEventListener('click', () => {
-        const text = item.querySelector('span').textContent;
-        alert('تحميل التطبيق: ' + text);
-        if (window.innerWidth <= 768) {
-            sidebar.classList.remove('open');
-            sidebarOverlay.classList.remove('active');
-        }
-    });
+formsButton.addEventListener('click', () => {
+    formsSubmenu.classList.toggle('active');
+});
+
+contractsButton.addEventListener('click', () => {
+    alert('فتح صفحة العقود');
+    if (window.innerWidth <= 768) {
+        sidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('active');
+    }
+});
+
+risksButton.addEventListener('click', () => {
+    alert('فتح صفحة المخاطر');
+    if (window.innerWidth <= 768) {
+        sidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('active');
+    }
 });
 
 searchInput.addEventListener('input', (e) => {
     const searchTerm = e.target.value.toLowerCase();
-    const chatItems = document.querySelectorAll('.chat-history-item');
+    const chatItems = chatHistoryList.querySelectorAll('.chat-history-item');
 
     chatItems.forEach(item => {
         const text = item.textContent.toLowerCase();

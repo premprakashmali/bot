@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,15 +29,15 @@
         <div class="main-content" id="mainContent">
             <div class="welcome-container" id="welcomeContainer">
                 <div class="welcome-content">
-                    <!-- <i class="fas fa-comments"></i> -->
-                    <h1>مرحباً بك في المساعد الذكي</h1>
-                    <p>رفيقك الذكي لكل محادثة<br>ابدأ بكتابة رسالتك أدناه</p>
+                    <h1 id="welcomeTitle">مرحباً بك في المساعد الذكي</h1>
                 </div>
                 <div class="centered-input-wrapper">
                     <div class="centered-input-container">
-                        <input type="text" id="centeredMessageInput" placeholder="اسألني أي شيء..." autocomplete="off" />
+                        <input type="text" id="centeredMessageInput" placeholder="اسألني أي شيء..."
+                            autocomplete="off" />
                     </div>
-                    <button class="send-button-outside" id="centeredSendButton">
+                    <button class="send-button-with-text" id="centeredSendButton">
+                        <span>إرسال</span>
                         <i class="fas fa-paper-plane"></i>
                     </button>
                 </div>
@@ -51,7 +50,8 @@
                         <div class="input-container">
                             <input type="text" id="messageInput" placeholder="اكتب رسالتك هنا..." autocomplete="off" />
                         </div>
-                        <button class="send-button-outside" id="sendButton">
+                        <button class="send-button-with-text" id="sendButton">
+                            <span>إرسال</span>
                             <i class="fas fa-paper-plane"></i>
                         </button>
                     </div>
@@ -61,9 +61,9 @@
 
         <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <div class="sidebar-title">
-                    <i class="fas fa-balance-scale"></i>
-                    <span>بيتك</span>
+                <div class="sidebar-logo" id="sidebarLogo">
+                    <div class="logo-icon">⚖️</div>
+                    <span class="logo-text">بيتك</span>
                 </div>
             </div>
             <button class="new-chat-button" id="newChatButton">
@@ -75,34 +75,33 @@
                 <input type="text" class="search-input" id="searchInput" placeholder="البحث في المحادثات..."
                     autocomplete="off" />
             </div>
+            <button class="forms-button" id="formsButton">
+                <i class="fas fa-file-alt"></i>
+                <span>النماذج</span>
+            </button>
+            <div class="forms-submenu" id="formsSubmenu">
+                <button class="submenu-item" id="contractsButton">
+                    <i class="fas fa-file-contract"></i>
+                    <span>العقود</span>
+                </button>
+                <button class="submenu-item" id="risksButton">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>المخاطر</span>
+                </button>
+            </div>
             <div class="chat-history" id="chatHistory">
                 <div class="chat-history-title">المحادثات الأخيرة</div>
-                <div class="chat-history-item">
-                    <!-- <i class="fas fa-message"></i> -->
-                    <span>نصائح تطوير الويب</span>
-                </div>
-                <div class="chat-history-item">
-                    <!-- <i class="fas fa-message"></i> -->
-                    <span>أفضل ممارسات جافا سكريبت</span>
-                </div>
-                <div class="chat-history-item">
-                    <!-- <i class="fas fa-message"></i> -->
-                    <span>أفكار تصميم واجهة المستخدم</span>
-                </div>
-                <div class="chat-history-item">
-                    <!-- <i class="fas fa-message"></i> -->
-                    <span>دليل دمج الذكاء الاصطناعي</span>
+                <div id="chatHistoryList">
+
                 </div>
             </div>
             <div class="sidebar-footer">
-                <button class="settings-button" id="settingsButton">
-                    <i class="fas fa-cog"></i>
-                    <span>الإعدادات</span>
-                </button>
-                <!-- <button class="checkout-button" id="checkoutButton">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span>الدفع</span>
-                </button> -->
+                <div class="footer-user-info">
+                    <span class="footer-username">اسم المستخدم</span>
+                    <button class="footer-settings-btn" id="footerSettingsButton">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
