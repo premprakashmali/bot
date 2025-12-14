@@ -4,8 +4,7 @@ const centeredMessageInput = document.getElementById('centeredMessageInput');
 const sendButton = document.getElementById('sendButton');
 const centeredSendButton = document.getElementById('centeredSendButton');
 const newChatButton = document.getElementById('newChatButton');
-const checkoutButton = document.getElementById('checkoutButton');
-const settingsButton = document.getElementById('settingsButton');
+const userAccountButton = document.getElementById('userAccountButton');
 const menuToggle = document.getElementById('menuToggle');
 const sidebar = document.getElementById('sidebar');
 const sidebarOverlay = document.getElementById('sidebarOverlay');
@@ -15,6 +14,7 @@ const searchInput = document.getElementById('searchInput');
 
 let messages = [];
 let isFirstMessage = true;
+let isLoggedIn = false;
 
 const aiResponses = [
     "هذا سؤال رائع! دعني أقدم لك إجابة شاملة بناءً على أحدث المعلومات المتاحة.",
@@ -119,16 +119,13 @@ newChatButton.addEventListener('click', () => {
     }
 });
 
-checkoutButton.addEventListener('click', () => {
-    alert('فتح الدفع والإعدادات...\nهذا هو المكان الذي يمكن للمستخدمين إدارة حساباتهم واشتراكاتهم وتفضيلاتهم فيه.');
-    if (window.innerWidth <= 768) {
-        sidebar.classList.remove('open');
-        sidebarOverlay.classList.remove('active');
+userAccountButton.addEventListener('click', () => {
+    if (!isLoggedIn) {
+        alert('تسجيل الدخول / إنشاء حساب\n\nهنا يمكن للمستخدم:\n• تسجيل الدخول إلى حسابه\n• إنشاء حساب جديد\n• إدارة إعداداته\n• عرض اشتراكاته');
+    } else {
+        alert('إعدادات الحساب\n\n• الملف الشخصي\n• الاشتراكات\n• الإعدادات\n• تسجيل الخروج');
     }
-});
-
-settingsButton.addEventListener('click', () => {
-    alert('فتح الإعدادات...\nقم بتكوين تفضيلاتك والسمات وإعدادات الحساب هنا.');
+    
     if (window.innerWidth <= 768) {
         sidebar.classList.remove('open');
         sidebarOverlay.classList.remove('active');
@@ -138,7 +135,7 @@ settingsButton.addEventListener('click', () => {
 document.querySelectorAll('.chat-history-item').forEach(item => {
     item.addEventListener('click', () => {
         const text = item.querySelector('span').textContent;
-        alert('تحميل المحادثة السابقة: ' + text);
+        alert('تحميل التطبيق: ' + text);
         if (window.innerWidth <= 768) {
             sidebar.classList.remove('open');
             sidebarOverlay.classList.remove('active');
