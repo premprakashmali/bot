@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,69 +45,104 @@
             </div>
 
             <div class="chat-container" id="chatContainer">
-                <div class="chat-area" id="chatArea"></div>
-                <div class="input-area">
-                    <div class="input-wrapper">
-                        <div class="input-container">
-                            <input type="text" id="messageInput" placeholder="اكتب رسالتك هنا..." autocomplete="off" />
+                <div class="chat-main-wrapper">
+                    <div class="chat-area" id="chatArea"></div>
+                    <div class="input-area">
+                        <div class="input-wrapper">
+                            <div class="input-container">
+                                <input type="text" id="messageInput" placeholder="اكتب رسالتك هنا..."
+                                    autocomplete="off" />
+                            </div>
+                            <button class="send-button-with-text" id="sendButton">
+                                <span>إرسال</span>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
                         </div>
-                        <button class="send-button-with-text" id="sendButton">
-                            <span>إرسال</span>
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <div class="sidebar-logo" id="sidebarLogo">
-                    <div class="logo-icon">⚖️</div>
-                    <span class="logo-text">بيتك</span>
+            <div class="sidebar-icons" id="sidebarIcons">
+                <button class="sidebar-toggle sidebar-toggle-collapsed" id="sidebarToggleCollapsed">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <div class="sidebar-icon-item" data-action="new-chat" title="محادثة جديدة">
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="sidebar-icon-item" data-action="search" title="بحث">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="sidebar-icon-item" data-action="forms" title="النماذج">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <div class="sidebar-icon-item" data-action="history" title="المحادثات">
+                    <i class="fas fa-history"></i>
+                </div>
+                <div class="collapsed-user-avatar" data-action="profile" title="الملف الشخصي">
+                    م
                 </div>
             </div>
-            <button class="new-chat-button" id="newChatButton">
-                <i class="fas fa-plus"></i>
-                <span>محادثة جديدة</span>
-            </button>
-            <div class="search-container">
-                <i class="fas fa-search search-icon"></i>
-                <input type="text" class="search-input" id="searchInput" placeholder="البحث في المحادثات..."
-                    autocomplete="off" />
-            </div>
-            <button class="forms-button" id="formsButton">
-                <i class="fas fa-file-alt"></i>
-                <span>النماذج</span>
-            </button>
-            <div class="forms-submenu" id="formsSubmenu">
-                <button class="submenu-item" id="contractsButton">
-                    <i class="fas fa-file-contract"></i>
-                    <span>العقود</span>
-                </button>
-                <button class="submenu-item" id="risksButton">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <span>المخاطر</span>
-                </button>
-            </div>
-            <div class="chat-history" id="chatHistory">
-                <div class="chat-history-title">المحادثات الأخيرة</div>
-                <div id="chatHistoryList">
 
-                </div>
-            </div>
-            <div class="sidebar-footer">
-                <div class="footer-user-info">
-                    <span class="footer-username">اسم المستخدم</span>
-                    <button class="footer-settings-btn" id="footerSettingsButton">
-                        <i class="fas fa-cog"></i>
+            <div class="sidebar-content">
+                <div class="sidebar-header">
+                    <div class="sidebar-logo" id="sidebarLogo">
+                        <div class="logo-icon">⚖️</div>
+                        <span class="logo-text">بيتك</span>
+                    </div>
+                    <button class="sidebar-toggle sidebar-toggle-header" id="sidebarToggle">
+                        <i class="fas fa-chevron-right"></i>
                     </button>
+                </div>
+                <button class="new-chat-button" id="newChatButton">
+                    <i class="fas fa-plus"></i>
+                    <span>محادثة جديدة</span>
+                </button>
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" id="searchInput" placeholder="البحث في المحادثات..."
+                        autocomplete="off" />
+                </div>
+                <button class="forms-button" id="formsButton">
+                    <i class="fas fa-file-alt"></i>
+                    <span>النماذج</span>
+                </button>
+                <div class="forms-submenu" id="formsSubmenu">
+                    <button class="submenu-item" id="contractsButton">
+                        <i class="fas fa-file-contract"></i>
+                        <span>العقود</span>
+                    </button>
+                    <button class="submenu-item" id="risksButton">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>المخاطر</span>
+                    </button>
+                </div>
+                <div class="chat-history" id="chatHistory">
+                    <div class="chat-history-title">المحادثات الأخيرة</div>
+                    <div id="chatHistoryList">
+                        <!-- Chat history will be dynamically added here -->
+                    </div>
+                </div>
+                <div class="sidebar-footer">
+                    <div class="footer-user-info" id="footerUserInfo">
+                        <div class="user-info-left">
+                            <div class="user-avatar">م</div>
+                            <div class="user-details">
+                                <span class="footer-username">محمد أحمد</span>
+                                <span class="user-email">mohammed@example.com</span>
+                            </div>
+                        </div>
+                        <button class="footer-settings-btn" id="footerSettingsButton">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
     <script src="style.js"></script>
+
 </body>
 
 </html>

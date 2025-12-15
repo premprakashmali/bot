@@ -5,8 +5,11 @@ const sendButton = document.getElementById('sendButton');
 const centeredSendButton = document.getElementById('centeredSendButton');
 const newChatButton = document.getElementById('newChatButton');
 const footerSettingsButton = document.getElementById('footerSettingsButton');
+const footerUserInfo = document.getElementById('footerUserInfo');
 const menuToggle = document.getElementById('menuToggle');
 const sidebar = document.getElementById('sidebar');
+const sidebarToggle = document.getElementById('sidebarToggle');
+const sidebarToggleCollapsed = document.getElementById('sidebarToggleCollapsed');
 const sidebarOverlay = document.getElementById('sidebarOverlay');
 const welcomeContainer = document.getElementById('welcomeContainer');
 const chatContainer = document.getElementById('chatContainer');
@@ -52,10 +55,67 @@ sidebarOverlay.addEventListener('click', () => {
     sidebarOverlay.classList.remove('active');
 });
 
+sidebarToggle.addEventListener('click', () => {
+    sidebar.classList.toggle('collapsed');
+    updateToggleIcons();
+});
+
+sidebarToggleCollapsed.addEventListener('click', () => {
+    sidebar.classList.toggle('collapsed');
+    updateToggleIcons();
+});
+
+function updateToggleIcons() {
+    const isCollapsed = sidebar.classList.contains('collapsed');
+    const headerIcon = sidebarToggle.querySelector('i');
+    const collapsedIcon = sidebarToggleCollapsed.querySelector('i');
+
+    if (isCollapsed) {
+        headerIcon.className = 'fas fa-chevron-left';
+        collapsedIcon.className = 'fas fa-chevron-left';
+    } else {
+        headerIcon.className = 'fas fa-chevron-right';
+        collapsedIcon.className = 'fas fa-chevron-right';
+    }
+}
+
+// Handle icon clicks in collapsed mode
+document.querySelectorAll('.sidebar-icon-item, .collapsed-user-avatar').forEach(item => {
+    item.addEventListener('click', () => {
+        const action = item.getAttribute('data-action');
+
+        switch (action) {
+            case 'new-chat':
+                sidebar.classList.remove('collapsed');
+                sidebarToggle.querySelector('i').className = 'fas fa-chevron-right';
+                setTimeout(() => newChatButton.click(), 300);
+                break;
+            case 'search':
+                sidebar.classList.remove('collapsed');
+                sidebarToggle.querySelector('i').className = 'fas fa-chevron-right';
+                setTimeout(() => searchInput.focus(), 300);
+                break;
+            case 'forms':
+                sidebar.classList.remove('collapsed');
+                sidebarToggle.querySelector('i').className = 'fas fa-chevron-right';
+                setTimeout(() => formsButton.click(), 300);
+                break;
+            case 'history':
+                sidebar.classList.remove('collapsed');
+                sidebarToggle.querySelector('i').className = 'fas fa-chevron-right';
+                break;
+            case 'profile':
+                alert('معلومات الحساب\n\nالاسم: محمد أحمد\nالبريد: mohammed@example.com');
+                break;
+        }
+    });
+});
+
 sidebarLogo.addEventListener('click', () => {
     const randomTitle = welcomeTitles[Math.floor(Math.random() * welcomeTitles.length)];
     welcomeTitle.textContent = randomTitle;
 
+    // Add animation effect
     welcomeTitle.style.animation = 'none';
     setTimeout(() => {
         welcomeTitle.style.animation = 'fadeIn 0.5s ease';
@@ -106,6 +166,7 @@ function sendMessage(inputElement) {
         transitionToChat();
         isFirstMessage = false;
 
+        // Save chat session with first message
         const sessionTitle = message.length > 40 ? message.substring(0, 40) + '...' : message;
         chatSessions.unshift({
             title: sessionTitle,
@@ -117,6 +178,7 @@ function sendMessage(inputElement) {
 
     addMessage(message, true);
 
+    // Add message to current session
     if (chatSessions.length > 0) {
         chatSessions[0].messages.push({ content: message, isUser: true });
     }
@@ -127,6 +189,7 @@ function sendMessage(inputElement) {
         const aiResponse = getAIResponse();
         addMessage(aiResponse, false);
 
+        // Add AI response to current session
         if (chatSessions.length > 0) {
             chatSessions[0].messages.push({ content: aiResponse, isUser: false });
         }
@@ -204,6 +267,18 @@ newChatButton.addEventListener('click', () => {
 
 footerSettingsButton.addEventListener('click', () => {
     alert('إعدادات الحساب\n\n• الملف الشخصي\n• الاشتراكات\n• الإعدادات\n• تسجيل الخروج');
+
+    if (window.innerWidth <= 768) {
+        sidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('active');
+    }
+});
+
+footerUserInfo.addEventListener('click', (e) => {
+    // Don't trigger if clicking on settings button
+    if (e.target.closest('.footer-settings-btn')) return;
+
+    alert('معلومات الحساب\n\nالاسم: محمد أحمد\nالبريد: mohammed@example.com\n\nانقر على أيقونة الإعدادات لتعديل معلوماتك');
 
     if (window.innerWidth <= 768) {
         sidebar.classList.remove('open');
