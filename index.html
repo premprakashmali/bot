@@ -64,37 +64,17 @@
         </div>
 
         <div class="sidebar" id="sidebar">
-            <div class="sidebar-icons" id="sidebarIcons">
-                <button class="sidebar-toggle sidebar-toggle-collapsed" id="sidebarToggleCollapsed">
-                    <i class="fas fa-chevron-right"></i>
+            <div class="sidebar-header">
+                <div class="sidebar-logo" id="sidebarLogo">
+                    <div class="logo-icon">⚖️</div>
+                    <span class="logo-text">بيتك</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
                 </button>
-                <div class="sidebar-icon-item" data-action="new-chat" title="محادثة جديدة">
-                    <i class="fas fa-plus"></i>
-                </div>
-                <div class="sidebar-icon-item" data-action="search" title="بحث">
-                    <i class="fas fa-search"></i>
-                </div>
-                <div class="sidebar-icon-item" data-action="forms" title="النماذج">
-                    <i class="fas fa-file-alt"></i>
-                </div>
-                <div class="sidebar-icon-item" data-action="history" title="المحادثات">
-                    <i class="fas fa-history"></i>
-                </div>
-                <div class="collapsed-user-avatar" data-action="profile" title="الملف الشخصي">
-                    م
-                </div>
             </div>
 
             <div class="sidebar-content">
-                <div class="sidebar-header">
-                    <div class="sidebar-logo" id="sidebarLogo">
-                        <div class="logo-icon">⚖️</div>
-                        <span class="logo-text">بيتك</span>
-                    </div>
-                    <button class="sidebar-toggle sidebar-toggle-header" id="sidebarToggle">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
                 <button class="new-chat-button" id="newChatButton">
                     <i class="fas fa-plus"></i>
                     <span>محادثة جديدة</span>
@@ -120,9 +100,7 @@
                 </div>
                 <div class="chat-history" id="chatHistory">
                     <div class="chat-history-title">المحادثات الأخيرة</div>
-                    <div id="chatHistoryList">
-                        <!-- Chat history will be dynamically added here -->
-                    </div>
+                    <div id="chatHistoryList"></div>
                 </div>
                 <div class="sidebar-footer">
                     <div class="footer-user-info" id="footerUserInfo">
@@ -130,7 +108,6 @@
                             <div class="user-avatar">م</div>
                             <div class="user-details">
                                 <span class="footer-username">محمد أحمد</span>
-                                <span class="user-email">mohammed@example.com</span>
                             </div>
                         </div>
                         <button class="footer-settings-btn" id="footerSettingsButton">
@@ -139,10 +116,28 @@
                     </div>
                 </div>
             </div>
+
+            <div class="collapsed-menu">
+                <div class="collapsed-menu-item" id="collapsedNewChat" title="محادثة جديدة">
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="collapsed-menu-item" id="collapsedSearch" title="البحث">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="collapsed-menu-item" id="collapsedForms" title="النماذج">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <div class="collapsed-menu-item" id="collapsedHistory" title="المحادثات">
+                    <i class="fas fa-history"></i>
+                </div>
+                <div class="collapsed-menu-item" id="collapsedSettings" title="الإعدادات">
+                    <i class="fas fa-cog"></i>
+                </div>
+            </div>
         </div>
     </div>
-    <script src="style.js"></script>
 
+    <script src="style.js"></script>
 </body>
 
 </html>

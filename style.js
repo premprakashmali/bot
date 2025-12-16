@@ -8,8 +8,6 @@ const footerSettingsButton = document.getElementById('footerSettingsButton');
 const footerUserInfo = document.getElementById('footerUserInfo');
 const menuToggle = document.getElementById('menuToggle');
 const sidebar = document.getElementById('sidebar');
-const sidebarToggle = document.getElementById('sidebarToggle');
-const sidebarToggleCollapsed = document.getElementById('sidebarToggleCollapsed');
 const sidebarOverlay = document.getElementById('sidebarOverlay');
 const welcomeContainer = document.getElementById('welcomeContainer');
 const chatContainer = document.getElementById('chatContainer');
@@ -21,11 +19,18 @@ const risksButton = document.getElementById('risksButton');
 const chatHistoryList = document.getElementById('chatHistoryList');
 const sidebarLogo = document.getElementById('sidebarLogo');
 const welcomeTitle = document.getElementById('welcomeTitle');
+const sidebarToggle = document.getElementById('sidebarToggle');
+const collapsedNewChat = document.getElementById('collapsedNewChat');
+const collapsedSearch = document.getElementById('collapsedSearch');
+const collapsedForms = document.getElementById('collapsedForms');
+const collapsedHistory = document.getElementById('collapsedHistory');
+const collapsedSettings = document.getElementById('collapsedSettings');
 
 let messages = [];
 let chatSessions = [];
 let isFirstMessage = true;
-let isLoggedIn = false;
+let isSidebarCollapsed = false;
+
 
 const aiResponses = [
     "هذا سؤال رائع! دعني أقدم لك إجابة شاملة بناءً على أحدث المعلومات المتاحة.",
@@ -45,6 +50,7 @@ const welcomeTitles = [
     "كيف أقدر أخدمك"
 ];
 
+// Mobile menu toggle
 menuToggle.addEventListener('click', () => {
     sidebar.classList.toggle('open');
     sidebarOverlay.classList.toggle('active');
@@ -55,67 +61,53 @@ sidebarOverlay.addEventListener('click', () => {
     sidebarOverlay.classList.remove('active');
 });
 
+// Sidebar collapse toggle for desktop
 sidebarToggle.addEventListener('click', () => {
+    isSidebarCollapsed = !isSidebarCollapsed;
     sidebar.classList.toggle('collapsed');
-    updateToggleIcons();
+    sidebarToggle.classList.toggle('collapsed');
+    const icon = sidebarToggle.querySelector('i');
+    icon.className = isSidebarCollapsed ? 'fas fa-chevron-left' : 'fas fa-bars';
 });
 
-sidebarToggleCollapsed.addEventListener('click', () => {
-    sidebar.classList.toggle('collapsed');
-    updateToggleIcons();
+
+// Collapsed menu interactions
+collapsedNewChat.addEventListener('click', () => {
+    sidebar.classList.remove('collapsed');
+    setTimeout(() => {
+        newChatButton.click();
+    }, 300);
 });
 
-function updateToggleIcons() {
-    const isCollapsed = sidebar.classList.contains('collapsed');
-    const headerIcon = sidebarToggle.querySelector('i');
-    const collapsedIcon = sidebarToggleCollapsed.querySelector('i');
+collapsedSearch.addEventListener('click', () => {
+    sidebar.classList.remove('collapsed');
+    setTimeout(() => {
+        searchInput.focus();
+    }, 300);
+});
 
-    if (isCollapsed) {
-        headerIcon.className = 'fas fa-chevron-left';
-        collapsedIcon.className = 'fas fa-chevron-left';
-    } else {
-        headerIcon.className = 'fas fa-chevron-right';
-        collapsedIcon.className = 'fas fa-chevron-right';
-    }
-}
+collapsedForms.addEventListener('click', () => {
+    sidebar.classList.remove('collapsed');
+    setTimeout(() => {
+        formsButton.click();
+    }, 300);
+});
 
-// Handle icon clicks in collapsed mode
-document.querySelectorAll('.sidebar-icon-item, .collapsed-user-avatar').forEach(item => {
-    item.addEventListener('click', () => {
-        const action = item.getAttribute('data-action');
+collapsedHistory.addEventListener('click', () => {
+    sidebar.classList.remove('collapsed');
+});
 
-        switch (action) {
-            case 'new-chat':
-                sidebar.classList.remove('collapsed');
-                sidebarToggle.querySelector('i').className = 'fas fa-chevron-right';
-                setTimeout(() => newChatButton.click(), 300);
-                break;
-            case 'search':
-                sidebar.classList.remove('collapsed');
-                sidebarToggle.querySelector('i').className = 'fas fa-chevron-right';
-                setTimeout(() => searchInput.focus(), 300);
-                break;
-            case 'forms':
-                sidebar.classList.remove('collapsed');
-                sidebarToggle.querySelector('i').className = 'fas fa-chevron-right';
-                setTimeout(() => formsButton.click(), 300);
-                break;
-            case 'history':
-                sidebar.classList.remove('collapsed');
-                sidebarToggle.querySelector('i').className = 'fas fa-chevron-right';
-                break;
-            case 'profile':
-                alert('معلومات الحساب\n\nالاسم: محمد أحمد\nالبريد: mohammed@example.com');
-                break;
-        }
-    });
+collapsedSettings.addEventListener('click', () => {
+    sidebar.classList.remove('collapsed');
+    setTimeout(() => {
+        footerSettingsButton.click();
+    }, 300);
 });
 
 sidebarLogo.addEventListener('click', () => {
     const randomTitle = welcomeTitles[Math.floor(Math.random() * welcomeTitles.length)];
     welcomeTitle.textContent = randomTitle;
 
-    // Add animation effect
     welcomeTitle.style.animation = 'none';
     setTimeout(() => {
         welcomeTitle.style.animation = 'fadeIn 0.5s ease';
@@ -166,7 +158,6 @@ function sendMessage(inputElement) {
         transitionToChat();
         isFirstMessage = false;
 
-        // Save chat session with first message
         const sessionTitle = message.length > 40 ? message.substring(0, 40) + '...' : message;
         chatSessions.unshift({
             title: sessionTitle,
@@ -178,7 +169,6 @@ function sendMessage(inputElement) {
 
     addMessage(message, true);
 
-    // Add message to current session
     if (chatSessions.length > 0) {
         chatSessions[0].messages.push({ content: message, isUser: true });
     }
@@ -189,7 +179,6 @@ function sendMessage(inputElement) {
         const aiResponse = getAIResponse();
         addMessage(aiResponse, false);
 
-        // Add AI response to current session
         if (chatSessions.length > 0) {
             chatSessions[0].messages.push({ content: aiResponse, isUser: false });
         }
@@ -275,7 +264,6 @@ footerSettingsButton.addEventListener('click', () => {
 });
 
 footerUserInfo.addEventListener('click', (e) => {
-    // Don't trigger if clicking on settings button
     if (e.target.closest('.footer-settings-btn')) return;
 
     alert('معلومات الحساب\n\nالاسم: محمد أحمد\nالبريد: mohammed@example.com\n\nانقر على أيقونة الإعدادات لتعديل معلوماتك');
@@ -319,5 +307,37 @@ searchInput.addEventListener('input', (e) => {
         }
     });
 });
+
+function expandSidebarAndClick(callback) {
+    if (isSidebarCollapsed) {
+        isSidebarCollapsed = false; // update state
+        sidebar.classList.remove('collapsed');
+        sidebarToggle.classList.remove('collapsed');
+        const icon = sidebarToggle.querySelector('i');
+        icon.className = 'fas fa-bars';
+    }
+    setTimeout(callback, 300);
+}
+
+collapsedNewChat.addEventListener('click', () => {
+    expandSidebarAndClick(() => newChatButton.click());
+});
+
+collapsedSearch.addEventListener('click', () => {
+    expandSidebarAndClick(() => searchInput.focus());
+});
+
+collapsedForms.addEventListener('click', () => {
+    expandSidebarAndClick(() => formsButton.click());
+});
+
+collapsedHistory.addEventListener('click', () => {
+    expandSidebarAndClick(() => { });
+});
+
+collapsedSettings.addEventListener('click', () => {
+    expandSidebarAndClick(() => footerSettingsButton.click());
+});
+
 
 centeredMessageInput.focus();
