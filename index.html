@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المساعد الذكي</title>
+    <title>AI Assistant - المساعد الذكي</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -16,48 +16,37 @@
             المساعد الذكي
         </div>
         <button class="menu-toggle" id="menuToggle">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                    d="M6 4C4.34315 4 3 5.34315 3 7V17C3 18.6569 4.34315 20 6 20H18C19.6569 20 21 18.6569 21 17V7C21 5.34315 19.6569 4 18 4H6ZM5 7C5 6.44772 5.44772 6 6 6H11V18H6C5.44772 18 5 17.5523 5 17V7ZM13 18H18C18.5523 18 19 17.5523 19 17V7C19 6.44772 18.5523 6 18 6H13V18Z"
-                    fill="#ffffff" />
-            </svg>
+            <i class="fas fa-bars"></i>
         </button>
     </div>
 
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <div class="container">
-        <div class="main-content" id="mainContent">
-            <div class="welcome-container" id="welcomeContainer">
-                <div class="welcome-content">
-                    <h1 id="welcomeTitle">مرحباً بك في المساعد الذكي</h1>
+        <div class="main-content">
+            <div class="welcome-screen" id="welcomeScreen">
+                <div class="welcome-icon">
+                    <i class="fas fa-comments"></i>
                 </div>
-                <div class="centered-input-wrapper">
-                    <div class="centered-input-container">
-                        <input type="text" id="centeredMessageInput" placeholder="اسألني أي شيء..."
-                            autocomplete="off" />
-                    </div>
-                    <button class="send-button-with-text" id="centeredSendButton">
+                <h1 class="welcome-title" id="welcomeTitle">مرحباً بك في المساعد الذكي</h1>
+                <div class="input-wrapper">
+                    <input type="text" class="message-input" id="welcomeInput" placeholder="اسألني أي شيء...">
+                    <button class="send-btn" id="welcomeSendBtn">
                         <span>إرسال</span>
                         <i class="fas fa-paper-plane"></i>
                     </button>
                 </div>
             </div>
 
-            <div class="chat-container" id="chatContainer">
-                <div class="chat-main-wrapper">
-                    <div class="chat-area" id="chatArea"></div>
-                    <div class="input-area">
-                        <div class="input-wrapper">
-                            <div class="input-container">
-                                <input type="text" id="messageInput" placeholder="اكتب رسالتك هنا..."
-                                    autocomplete="off" />
-                            </div>
-                            <button class="send-button-with-text" id="sendButton">
-                                <span>إرسال</span>
-                                <i class="fas fa-paper-plane"></i>
-                            </button>
-                        </div>
+            <div class="chat-screen" id="chatScreen">
+                <div class="chat-wrapper">
+                    <div class="chat-messages" id="chatMessages"></div>
+                    <div class="chat-input-area">
+                        <input type="text" class="chat-input" id="chatInput" placeholder="اكتب رسالتك هنا...">
+                        <button class="chat-send-btn" id="chatSendBtn">
+                            <span>إرسال</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -66,77 +55,79 @@
         <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="sidebar-logo" id="sidebarLogo">
-                    <div class="logo-icon">⚖️</div>
-                    <span class="logo-text">بيتك</span>
+                    <div class="logo-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <span class="logo-text">AI Assistant</span>
                 </div>
-                <button class="sidebar-toggle" id="sidebarToggle">
-                    <i class="fas fa-bars"></i>
+                <button class="collapse-btn" id="collapseBtn">
+                    <i class="fa-solid fa-bars" id="collapseIcon"></i>
                 </button>
             </div>
+            <button class="expand-btn" id="expandBtn">
+                <i class="fas fa-chevron-left"></i>
+            </button>
 
             <div class="sidebar-content">
-                <button class="new-chat-button" id="newChatButton">
+                <button class="new-chat-btn" id="newChatBtn">
                     <i class="fas fa-plus"></i>
                     <span>محادثة جديدة</span>
                 </button>
-                <div class="search-container">
+
+                <div class="search-box">
                     <i class="fas fa-search search-icon"></i>
-                    <input type="text" class="search-input" id="searchInput" placeholder="البحث في المحادثات..."
-                        autocomplete="off" />
+                    <input type="text" class="search-input" id="searchInput" placeholder="ابحث في المحادثات...">
                 </div>
-                <button class="forms-button" id="formsButton">
+
+                <button class="forms-btn" id="formsBtn">
                     <i class="fas fa-file-alt"></i>
                     <span>النماذج</span>
                 </button>
+
                 <div class="forms-submenu" id="formsSubmenu">
-                    <button class="submenu-item" id="contractsButton">
+                    <button class="submenu-item" id="contractsBtn">
                         <i class="fas fa-file-contract"></i>
                         <span>العقود</span>
                     </button>
-                    <button class="submenu-item" id="risksButton">
+                    <button class="submenu-item" id="risksBtn">
                         <i class="fas fa-exclamation-triangle"></i>
                         <span>المخاطر</span>
                     </button>
                 </div>
-                <div class="chat-history" id="chatHistory">
-                    <div class="chat-history-title">المحادثات الأخيرة</div>
-                    <div id="chatHistoryList"></div>
-                </div>
-                <div class="sidebar-footer">
-                    <div class="footer-user-info" id="footerUserInfo">
-                        <div class="user-info-left">
-                            <div class="user-avatar">م</div>
-                            <div class="user-details">
-                                <span class="footer-username">محمد أحمد</span>
-                            </div>
-                        </div>
-                        <button class="footer-settings-btn" id="footerSettingsButton">
-                            <i class="fas fa-cog"></i>
-                        </button>
+
+                <div class="collapsed-icons">
+                    <div class="collapsed-icon-btn" id="collapsedSearch" title="البحث">
+                        <i class="fas fa-search"></i>
                     </div>
+                    <div class="collapsed-icon-btn" id="collapsedChats" title="المحادثات">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="collapsed-icon-btn" id="collapsedForms" title="النماذج">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                </div>
+
+                <div class="recent-chats">
+                    <div class="recent-title">المحادثات الأخيرة</div>
+                    <div id="recentChatsList"></div>
                 </div>
             </div>
 
-            <div class="collapsed-menu">
-                <div class="collapsed-menu-item" id="collapsedNewChat" title="محادثة جديدة">
-                    <i class="fas fa-plus"></i>
-                </div>
-                <div class="collapsed-menu-item" id="collapsedSearch" title="البحث">
-                    <i class="fas fa-search"></i>
-                </div>
-                <div class="collapsed-menu-item" id="collapsedForms" title="النماذج">
-                    <i class="fas fa-file-alt"></i>
-                </div>
-                <div class="collapsed-menu-item" id="collapsedHistory" title="المحادثات">
-                    <i class="fas fa-history"></i>
-                </div>
-                <div class="collapsed-menu-item" id="collapsedSettings" title="الإعدادات">
-                    <i class="fas fa-cog"></i>
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-info">
+                        <div class="user-name">لينغويز</div>
+                    </div>
+                    <button class="settings-btn">
+                        <i class="fas fa-cog"></i>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
-
     <script src="style.js"></script>
 </body>
 

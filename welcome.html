@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بيّنة: الذكاء القانوني الأسرع والأدق</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1729 100%);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 194, 255, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+            animation: pulse 8s ease-in-out infinite;
+            filter: blur(60px);
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -150px;
+            left: -150px;
+            animation: pulse 6s ease-in-out infinite reverse;
+            filter: blur(60px);
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            max-height: calc(100vh - 40px);
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .logo i {
+            font-size: 36px;
+            color: #00c2ff;
+            filter: drop-shadow(0 0 20px rgba(0, 194, 255, 0.8));
+            animation: neonGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes neonGlow {
+            from {
+                filter: drop-shadow(0 0 20px rgba(0, 194, 255, 0.8));
+            }
+
+            to {
+                filter: drop-shadow(0 0 30px rgba(0, 194, 255, 1));
+            }
+        }
+
+        .logo h1 {
+            font-size: 42px;
+            color: white;
+            font-weight: 800;
+            text-shadow: 0 0 20px rgba(0, 194, 255, 0.5);
+        }
+
+        .logo h1 {
+            font-size: 42px;
+            color: white;
+            font-weight: 800;
+        }
+
+        .title {
+            font-size: 28px;
+            color: white;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(0, 194, 255, 0.3);
+        }
+
+        .subtitle {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 400;
+            margin-bottom: 25px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 14px 35px;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .btn-trial {
+            background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
+            color: #0a0e27;
+            box-shadow: 0 4px 25px rgba(255, 215, 0, 0.6), 0 0 40px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-trial:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 35px rgba(255, 215, 0, 0.8), 0 0 50px rgba(255, 215, 0, 0.5);
+        }
+
+        .btn-login {
+            background: rgba(0, 194, 255, 0.1);
+            color: #00c2ff;
+            border: 2px solid #00c2ff;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 194, 255, 0.3);
+        }
+
+        .btn-login:hover {
+            background: rgba(0, 194, 255, 0.2);
+            border-color: #00c2ff;
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(0, 194, 255, 0.6);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            max-width: 900px;
+            margin: 0 auto;
+            flex-shrink: 0;
+        }
+
+        .feature-card {
+            background: rgba(0, 194, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 194, 255, 0.2);
+            border-radius: 16px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-card:hover {
+            background: rgba(0, 194, 255, 0.1);
+            border-color: rgba(0, 194, 255, 0.5);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 194, 255, 0.3), 0 0 30px rgba(0, 194, 255, 0.2);
+        }
+
+        .feature-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            width: 100%;
+        }
+
+        .feature-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, rgba(0, 194, 255, 0.2) 0%, rgba(0, 194, 255, 0.3) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 0 20px rgba(0, 194, 255, 0.4);
+            border: 1px solid rgba(0, 194, 255, 0.3);
+        }
+
+        .feature-icon i {
+            font-size: 20px;
+            color: #00c2ff;
+            filter: drop-shadow(0 0 5px rgba(0, 194, 255, 0.8));
+        }
+
+        .feature-title {
+            font-size: 17px;
+            color: white;
+            font-weight: 700;
+            text-align: right;
+        }
+
+        .feature-description {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            text-align: right;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 35px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, rgba(10, 14, 39, 0.98) 0%, rgba(26, 31, 58, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 194, 255, 0.2);
+            border: 1px solid rgba(0, 194, 255, 0.3);
+            animation: slideUp 0.4s ease;
+        }
+
+        .modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: rgba(0, 194, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #00c2ff 0%, #0099cc 100%);
+            border-radius: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #00d4ff 0%, #00aadd 100%);
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-close {
+            position: sticky;
+            top: 0;
+            left: 0;
+            background: rgba(0, 194, 255, 0.15);
+            border: 1px solid rgba(0, 194, 255, 0.3);
+            font-size: 28px;
+            color: #00c2ff;
+            cursor: pointer;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            z-index: 10;
+            margin-bottom: 10px;
+        }
+
+        .modal-close:hover {
+            background: rgba(0, 194, 255, 0.25);
+            color: #00c2ff;
+            box-shadow: 0 0 15px rgba(0, 194, 255, 0.5);
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #00c2ff;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 0 0 20px rgba(0, 194, 255, 0.5);
+        }
+
+        .user-categories {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .category-btn {
+            background: rgba(0, 194, 255, 0.05);
+            border: 2px solid rgba(0, 194, 255, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: right;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .category-btn:hover {
+            background: rgba(0, 194, 255, 0.1);
+            border-color: #00c2ff;
+            transform: translateX(-5px);
+            box-shadow: 0 5px 25px rgba(0, 194, 255, 0.4), 0 0 30px rgba(0, 194, 255, 0.2);
+        }
+
+        .category-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #00c2ff 0%, #0099cc 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 0 20px rgba(0, 194, 255, 0.5);
+        }
+
+        .category-icon i {
+            font-size: 24px;
+            color: white;
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+        }
+
+        .category-text {
+            flex: 1;
+        }
+
+        .category-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #00c2ff;
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(0, 194, 255, 0.3);
+        }
+
+        .category-desc {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Login Form Styles */
+        .login-form {
+            display: none;
+        }
+
+        .login-form.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #00c2ff;
+            margin-bottom: 8px;
+            text-align: right;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid rgba(0, 194, 255, 0.3);
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: 'Cairo', sans-serif;
+            transition: all 0.3s ease;
+            text-align: right;
+            background: rgba(0, 194, 255, 0.05);
+            color: white;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #00c2ff;
+            box-shadow: 0 0 0 3px rgba(0, 194, 255, 0.2), 0 0 20px rgba(0, 194, 255, 0.3);
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .payment-card {
+            background: rgba(0, 194, 255, 0.05);
+            border: 2px solid rgba(0, 194, 255, 0.2);
+            border-radius: 12px;
+            padding: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .payment-card:hover {
+            background: rgba(0, 194, 255, 0.1);
+            border-color: #00c2ff;
+            transform: translateX(-3px);
+            box-shadow: 0 3px 20px rgba(0, 194, 255, 0.3);
+        }
+
+        .payment-card.selected {
+            background: rgba(0, 194, 255, 0.15);
+            border-color: #ffd700;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+        }
+
+        .payment-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #00c2ff 0%, #0099cc 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 0 15px rgba(0, 194, 255, 0.4);
+        }
+
+        .payment-icon i {
+            font-size: 18px;
+            color: white;
+        }
+
+        .payment-info {
+            flex: 1;
+            text-align: right;
+        }
+
+        .payment-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: #00c2ff;
+            margin-bottom: 2px;
+        }
+
+        .payment-desc {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            padding-top: 10px;
+        }
+
+        .form-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .form-btn-primary {
+            background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
+            color: #0a0e27;
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4), 0 0 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .form-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(255, 215, 0, 0.6), 0 0 40px rgba(255, 215, 0, 0.3);
+        }
+
+        .form-btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-btn-secondary {
+            background: rgba(0, 194, 255, 0.1);
+            color: #00c2ff;
+            border: 2px solid rgba(0, 194, 255, 0.3);
+        }
+
+        .form-btn-secondary:hover {
+            background: rgba(0, 194, 255, 0.2);
+            border-color: #00c2ff;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 194, 255, 0.1);
+            border: 1px solid rgba(0, 194, 255, 0.3);
+            color: #00c2ff;
+            cursor: pointer;
+            font-size: 13px;
+            font-family: 'Cairo', sans-serif;
+            margin-bottom: 15px;
+            padding: 8px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(0, 194, 255, 0.2);
+            border-color: #00c2ff;
+            box-shadow: 0 0 15px rgba(0, 194, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .logo h1 {
+                font-size: 36px;
+            }
+
+            .title {
+                font-size: 24px;
+            }
+
+            .subtitle {
+                font-size: 14px;
+            }
+
+            .button-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .modal-content {
+                padding: 30px 20px;
+                max-width: 95%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-balance-scale"></i>
+                <h1>بيّنة</h1>
+            </div>
+            <div class="title">بيّنة: الذكاء القانوني الأسرع والأدق</div>
+            <div class="subtitle">شريك القانوني الذكي.. دقة أعلى، وسرعة فائقة</div>
+            <div class="button-group">
+                <button class="btn btn-trial" onclick="startTrial()">تجربة مجانية</button>
+                <button class="btn btn-login" onclick="login()">تسجيل الدخول</button>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-header">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="feature-title">الاستشارات القانونية</div>
+                </div>
+                <div class="feature-description">احصل على استشارات قانونية احترافية فورية بأعلى مستوى من الدقة
+                    والاحترافية</div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-header">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <div class="feature-title">التحليل القانوني للوثائق</div>
+                </div>
+                <div class="feature-description">قراءة وتحليل المستندات بدقة عالية لمراجعة العقود والمستندات وإيجاد
+                    الثغرات المحتملة</div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-header">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="feature-title">البحث القانوني المتقدم</div>
+                </div>
+                <div class="feature-description">خدمات بحثية متخصصة لإيجاد سوابق قضائية وقوانين تتناسب مع احتياجاتك
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-header">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="feature-title">الصياغة القانونية المحكمة</div>
+                </div>
+                <div class="feature-description">إعداد مذكرات ووثائق وعقود باحترافية عالية وفق القوانين والتشريعات
+                    المحلية</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>منصة بيّنة للذكاء القانوني | جميع الحقوق محفوظة © 2024</p>
+        </div>
+    </div>
+
+    <div class="modal" id="categoryModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h2 class="modal-title">اختر فئة المستخدم</h2>
+            <div class="user-categories">
+                <div class="category-btn" onclick="selectCategory('طالب')">
+                    <div class="category-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="category-text">
+                        <div class="category-title">طالب</div>
+                        <div class="category-desc">للطلاب والباحثين في المجال القانوني</div>
+                    </div>
+                </div>
+
+                <div class="category-btn" onclick="selectCategory('محامي')">
+                    <div class="category-icon">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <div class="category-text">
+                        <div class="category-title">محامي</div>
+                        <div class="category-desc">للمحامين والمستشارين القانونيين</div>
+                    </div>
+                </div>
+
+                <div class="category-btn" onclick="selectCategory('مكتب محاماة')">
+                    <div class="category-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="category-text">
+                        <div class="category-title">مكتب محاماة</div>
+                        <div class="category-desc">لمكاتب المحاماة والشركات القانونية</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <button class="back-btn" onclick="backToCategory()">
+                <i class="fas fa-arrow-right"></i>
+                رجوع
+            </button>
+            <h2 class="modal-title" id="loginTitle">تسجيل الدخول</h2>
+
+            <form class="login-form active" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label class="form-label">البريد الإلكتروني</label>
+                    <input type="email" class="form-input" placeholder="example@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">كلمة المرور</label>
+                    <input type="password" class="form-input" placeholder="••••••••" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">اختر طريقة الدفع</label>
+                    <div class="payment-methods">
+                        <div class="payment-card" onclick="selectPayment(this, 'credit-card')">
+                            <div class="payment-icon">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div class="payment-info">
+                                <div class="payment-name">بطاقة ائتمانية</div>
+                                <div class="payment-desc">فيزا، ماستركارد، أمريكان إكسبريس</div>
+                            </div>
+                        </div>
+
+                        <div class="payment-card" onclick="selectPayment(this, 'paypal')">
+                            <div class="payment-icon">
+                                <i class="fab fa-paypal"></i>
+                            </div>
+                            <div class="payment-info">
+                                <div class="payment-name">PayPal</div>
+                                <div class="payment-desc">الدفع عبر حساب PayPal</div>
+                            </div>
+                        </div>
+
+                        <div class="payment-card" onclick="selectPayment(this, 'bank-transfer')">
+                            <div class="payment-icon">
+                                <i class="fas fa-university"></i>
+                            </div>
+                            <div class="payment-info">
+                                <div class="payment-name">تحويل بنكي</div>
+                                <div class="payment-desc">التحويل المباشر من البنك</div>
+                            </div>
+                        </div>
+
+                        <div class="payment-card" onclick="selectPayment(this, 'apple-pay')">
+                            <div class="payment-icon">
+                                <i class="fab fa-apple-pay"></i>
+                            </div>
+                            <div class="payment-info">
+                                <div class="payment-name">Apple Pay</div>
+                                <div class="payment-desc">الدفع عبر Apple Pay</div>
+                            </div>
+                        </div>
+
+                        <div class="payment-card" onclick="selectPayment(this, 'google-pay')">
+                            <div class="payment-icon">
+                                <i class="fab fa-google-pay"></i>
+                            </div>
+                            <div class="payment-info">
+                                <div class="payment-name">Google Pay</div>
+                                <div class="payment-desc">الدفع عبر Google Pay</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="form-btn form-btn-primary" id="submitBtn" disabled>متابعة</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let selectedCategory = '';
+        let selectedPaymentMethod = '';
+        let isTrialMode = false;
+
+        function startTrial() {
+            isTrialMode = true;
+            document.getElementById('categoryModal').classList.add('active');
+        }
+
+        function login() {
+            isTrialMode = false;
+            document.getElementById('categoryModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('categoryModal').classList.remove('active');
+            document.getElementById('loginModal').classList.remove('active');
+            selectedPaymentMethod = '';
+            document.querySelectorAll('.payment-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            document.getElementById('submitBtn').disabled = true;
+        }
+
+        function selectCategory(category) {
+            selectedCategory = category;
+            document.getElementById('categoryModal').classList.remove('active');
+
+            setTimeout(() => {
+                const loginTitle = document.getElementById('loginTitle');
+                loginTitle.textContent = isTrialMode ? `تجربة مجانية - ${category}` : `تسجيل الدخول - ${category}`;
+                document.getElementById('loginModal').classList.add('active');
+            }, 300);
+        }
+
+        function backToCategory() {
+            document.getElementById('loginModal').classList.remove('active');
+            selectedPaymentMethod = '';
+            document.querySelectorAll('.payment-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            document.getElementById('submitBtn').disabled = true;
+
+            setTimeout(() => {
+                document.getElementById('categoryModal').classList.add('active');
+            }, 300);
+        }
+
+        function selectPayment(element, method) {
+            document.querySelectorAll('.payment-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+
+            element.classList.add('selected');
+            selectedPaymentMethod = method;
+
+            document.getElementById('submitBtn').disabled = false;
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+
+            if (!selectedPaymentMethod) {
+                alert('الرجاء اختيار طريقة الدفع');
+                return;
+            }
+
+            const mode = isTrialMode ? 'التجربة المجانية' : 'تسجيل الدخول';
+            const paymentNames = {
+                'credit-card': 'بطاقة ائتمانية',
+                'paypal': 'PayPal',
+                'bank-transfer': 'تحويل بنكي',
+                'apple-pay': 'Apple Pay',
+                'google-pay': 'Google Pay'
+            };
+
+            alert(`مرحباً بك! جاري ${mode} كـ ${selectedCategory}\nطريقة الدفع: ${paymentNames[selectedPaymentMethod]}`);
+
+            sessionStorage.setItem('userCategory', selectedCategory);
+            sessionStorage.setItem('paymentMethod', selectedPaymentMethod);
+            sessionStorage.setItem('isTrialMode', isTrialMode);
+
+            window.location.href = 'index.html';
+        }
+
+        window.onclick = function (event) {
+            const categoryModal = document.getElementById('categoryModal');
+            const loginModal = document.getElementById('loginModal');
+            if (event.target === categoryModal) {
+                closeModal();
+            }
+            if (event.target === loginModal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+
+</html>

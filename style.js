@@ -1,48 +1,33 @@
-const chatArea = document.getElementById('chatArea');
-const messageInput = document.getElementById('messageInput');
-const centeredMessageInput = document.getElementById('centeredMessageInput');
-const sendButton = document.getElementById('sendButton');
-const centeredSendButton = document.getElementById('centeredSendButton');
-const newChatButton = document.getElementById('newChatButton');
-const footerSettingsButton = document.getElementById('footerSettingsButton');
-const footerUserInfo = document.getElementById('footerUserInfo');
-const menuToggle = document.getElementById('menuToggle');
+
 const sidebar = document.getElementById('sidebar');
+const collapseBtn = document.getElementById('collapseBtn');
+const expandBtn = document.getElementById('expandBtn');
+const collapseIcon = document.getElementById('collapseIcon');
+const newChatBtn = document.getElementById('newChatBtn');
+const welcomeScreen = document.getElementById('welcomeScreen');
+const chatScreen = document.getElementById('chatScreen');
+const welcomeInput = document.getElementById('welcomeInput');
+const welcomeSendBtn = document.getElementById('welcomeSendBtn');
+const chatInput = document.getElementById('chatInput');
+const chatSendBtn = document.getElementById('chatSendBtn');
+const chatMessages = document.getElementById('chatMessages');
+const menuToggle = document.getElementById('menuToggle');
 const sidebarOverlay = document.getElementById('sidebarOverlay');
-const welcomeContainer = document.getElementById('welcomeContainer');
-const chatContainer = document.getElementById('chatContainer');
-const searchInput = document.getElementById('searchInput');
-const formsButton = document.getElementById('formsButton');
+const formsBtn = document.getElementById('formsBtn');
 const formsSubmenu = document.getElementById('formsSubmenu');
-const contractsButton = document.getElementById('contractsButton');
-const risksButton = document.getElementById('risksButton');
-const chatHistoryList = document.getElementById('chatHistoryList');
+const contractsBtn = document.getElementById('contractsBtn');
+const risksBtn = document.getElementById('risksBtn');
+const searchInput = document.getElementById('searchInput');
+const collapsedSearch = document.getElementById('collapsedSearch');
+const collapsedChats = document.getElementById('collapsedChats');
+const collapsedForms = document.getElementById('collapsedForms');
+const recentChatsList = document.getElementById('recentChatsList');
 const sidebarLogo = document.getElementById('sidebarLogo');
 const welcomeTitle = document.getElementById('welcomeTitle');
-const sidebarToggle = document.getElementById('sidebarToggle');
-const collapsedNewChat = document.getElementById('collapsedNewChat');
-const collapsedSearch = document.getElementById('collapsedSearch');
-const collapsedForms = document.getElementById('collapsedForms');
-const collapsedHistory = document.getElementById('collapsedHistory');
-const collapsedSettings = document.getElementById('collapsedSettings');
 
-let messages = [];
-let chatSessions = [];
-let isFirstMessage = true;
-let isSidebarCollapsed = false;
-
-
-const aiResponses = [
-    "هذا سؤال رائع! دعني أقدم لك إجابة شاملة بناءً على أحدث المعلومات المتاحة.",
-    "أفهم ما تبحث عنه. إليك تحليلي التفصيلي وتوصياتي...",
-    "ممتاز! يمكنني بالتأكيد مساعدتك في ذلك. بناءً على متطلباتك، إليك ما أقترحه...",
-    "شكراً على استفسارك! لقد قمت بمعالجة طلبك وإليك ما تحتاج إلى معرفته...",
-    "منظور مثير للاهتمام! دعني أحلل هذا لك مع بعض الرؤى الأساسية والخطوات القابلة للتنفيذ."
-];
-
-const welcomeTitles = [
-    "كيف يمكنني مساعدتك",
+const welcomeMessages = [
     "مرحباً بك في المساعد الذكي",
+    "كيف يمكنني مساعدتك",
     "حيّاك الله، كيف أقدر أخدمك اليوم",
     "أهلًا، أنا موجود للمساعدة بأي وقت",
     "حيّاك الله، يسعدني خدمتك",
@@ -50,7 +35,32 @@ const welcomeTitles = [
     "كيف أقدر أخدمك"
 ];
 
-// Mobile menu toggle
+const aiResponses = [
+    "هذا سؤال رائع! دعني أقدم لك إجابة شاملة بناءً على أحدث المعلومات المتاحة.",
+    "أفهم ما تبحث عنه. إليك تحليلي التفصيلي وتوصياتي...",
+    "ممتاز! يمكنني بالتأكيد مساعدتك في ذلك. بناءً على متطلباتك، إليك ما أقترحه...",
+    "شكراً على استفسارك! لقد قمت بمعالجة طلبك وإليك ما تحتاج إلى معرفته...",
+    "منظور مثير للاهتمام! دعني أحلل هذا لك مع بعض الرؤى الأساسية."
+];
+
+localStorage.removeItem('aiConversations');
+let conversations = [];
+let currentConversationId = null;
+
+renderRecentChats();
+
+sidebarLogo.addEventListener('click', () => {
+    const randomMessage = welcomeMessages[Math.floor(Math.random() * welcomeMessages.length)];
+    welcomeTitle.style.transform = 'scale(0.9)';
+    welcomeTitle.style.opacity = '0';
+
+    setTimeout(() => {
+        welcomeTitle.textContent = randomMessage;
+        welcomeTitle.style.transform = 'scale(1)';
+        welcomeTitle.style.opacity = '1';
+    }, 200);
+});
+
 menuToggle.addEventListener('click', () => {
     sidebar.classList.toggle('open');
     sidebarOverlay.classList.toggle('active');
@@ -61,57 +71,65 @@ sidebarOverlay.addEventListener('click', () => {
     sidebarOverlay.classList.remove('active');
 });
 
-// Sidebar collapse toggle for desktop
-sidebarToggle.addEventListener('click', () => {
-    isSidebarCollapsed = !isSidebarCollapsed;
+collapseBtn.addEventListener('click', () => {
     sidebar.classList.toggle('collapsed');
-    sidebarToggle.classList.toggle('collapsed');
-    const icon = sidebarToggle.querySelector('i');
-    icon.className = isSidebarCollapsed ? 'fas fa-chevron-left' : 'fas fa-bars';
+    if (sidebar.classList.contains('collapsed')) {
+        collapseIcon.classList.remove('fa-solid fa-bars');
+        collapseIcon.classList.add('fa-chevron-left');
+    } else {
+        collapseIcon.classList.remove('fa-chevron-left');
+        collapseIcon.classList.add('fa-solid fa-bars');
+    }
 });
 
-
-// Collapsed menu interactions
-collapsedNewChat.addEventListener('click', () => {
+expandBtn.addEventListener('click', () => {
     sidebar.classList.remove('collapsed');
-    setTimeout(() => {
-        newChatButton.click();
-    }, 300);
+    collapseIcon.classList.remove('fa-chevron-left');
+    collapseIcon.classList.add('fa-solid fa-bars');
+});
+
+formsBtn.addEventListener('click', () => {
+    formsSubmenu.classList.toggle('active');
+});
+
+contractsBtn.addEventListener('click', () => {
+    alert('فتح صفحة العقود');
+});
+
+risksBtn.addEventListener('click', () => {
+    alert('فتح صفحة المخاطر');
 });
 
 collapsedSearch.addEventListener('click', () => {
     sidebar.classList.remove('collapsed');
-    setTimeout(() => {
-        searchInput.focus();
-    }, 300);
+    setTimeout(() => searchInput.focus(), 300);
+});
+
+collapsedChats.addEventListener('click', () => {
+    sidebar.classList.remove('collapsed');
 });
 
 collapsedForms.addEventListener('click', () => {
     sidebar.classList.remove('collapsed');
-    setTimeout(() => {
-        formsButton.click();
-    }, 300);
+    setTimeout(() => formsBtn.click(), 300);
 });
 
-collapsedHistory.addEventListener('click', () => {
-    sidebar.classList.remove('collapsed');
+searchInput.addEventListener('input', (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    renderRecentChats(searchTerm);
 });
 
-collapsedSettings.addEventListener('click', () => {
-    sidebar.classList.remove('collapsed');
-    setTimeout(() => {
-        footerSettingsButton.click();
-    }, 300);
-});
+newChatBtn.addEventListener('click', () => {
+    currentConversationId = null;
+    chatScreen.classList.remove('active');
+    welcomeScreen.classList.remove('hidden');
+    chatMessages.innerHTML = '';
+    welcomeInput.value = '';
+    chatInput.value = '';
 
-sidebarLogo.addEventListener('click', () => {
-    const randomTitle = welcomeTitles[Math.floor(Math.random() * welcomeTitles.length)];
-    welcomeTitle.textContent = randomTitle;
-
-    welcomeTitle.style.animation = 'none';
-    setTimeout(() => {
-        welcomeTitle.style.animation = 'fadeIn 0.5s ease';
-    }, 10);
+    document.querySelectorAll('.chat-item').forEach(item => {
+        item.classList.remove('active');
+    });
 
     if (window.innerWidth <= 768) {
         sidebar.classList.remove('open');
@@ -119,7 +137,101 @@ sidebarLogo.addEventListener('click', () => {
     }
 });
 
-function addMessage(content, isUser) {
+function renderRecentChats(searchTerm = '') {
+    recentChatsList.innerHTML = '';
+
+    const filteredConversations = conversations.filter(conv =>
+        searchTerm === '' || conv.title.toLowerCase().includes(searchTerm)
+    );
+
+    if (filteredConversations.length === 0 && searchTerm === '') {
+        recentChatsList.innerHTML = '<div style="color: rgba(255,255,255,0.4); text-align: center; padding: 20px; font-size: 14px;">لا توجد محادثات سابقة</div>';
+        return;
+    }
+
+    if (filteredConversations.length === 0 && searchTerm !== '') {
+        recentChatsList.innerHTML = '<div style="color: rgba(255,255,255,0.4); text-align: center; padding: 20px; font-size: 14px;">لم يتم العثور على نتائج</div>';
+        return;
+    }
+
+    filteredConversations.forEach(conv => {
+        const chatItem = document.createElement('div');
+        chatItem.className = 'chat-item';
+        if (conv.id === currentConversationId) {
+            chatItem.classList.add('active');
+        }
+
+        chatItem.innerHTML = `
+                    <i class="fas fa-message"></i>
+                    <span class="chat-item-text">${conv.title}</span>
+                `;
+
+        chatItem.addEventListener('click', () => loadConversation(conv.id));
+        recentChatsList.appendChild(chatItem);
+    });
+}
+
+function loadConversation(id) {
+    const conversation = conversations.find(conv => conv.id === id);
+    if (!conversation) return;
+
+    currentConversationId = id;
+    welcomeScreen.classList.add('hidden');
+    chatScreen.classList.add('active');
+    chatMessages.innerHTML = '';
+
+    conversation.messages.forEach(msg => {
+        addMessage(msg.text, msg.isUser, false);
+    });
+
+    renderRecentChats();
+
+    if (window.innerWidth <= 768) {
+        sidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('active');
+    }
+}
+
+function saveConversation(firstMessage) {
+    if (currentConversationId) {
+        const conversation = conversations.find(conv => conv.id === currentConversationId);
+        if (conversation) {
+            return;
+        }
+    }
+
+    const now = new Date();
+    const time = now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+
+    const newConversation = {
+        id: Date.now(),
+        title: firstMessage.substring(0, 30) + (firstMessage.length > 30 ? '...' : ''),
+        time: time,
+        messages: []
+    };
+
+    conversations.unshift(newConversation);
+    currentConversationId = newConversation.id;
+
+    if (conversations.length > 20) {
+        conversations = conversations.slice(0, 20);
+    }
+
+    localStorage.setItem('aiConversations', JSON.stringify(conversations));
+    renderRecentChats();
+}
+
+function updateConversationMessages(text, isUser) {
+    if (!currentConversationId) return;
+
+    const conversation = conversations.find(conv => conv.id === currentConversationId);
+    if (conversation) {
+        conversation.messages.push({ text, isUser });
+        localStorage.setItem('aiConversations', JSON.stringify(conversations));
+    }
+}
+
+function addMessage(text, isUser, saveToHistory = true) {
     const messageDiv = document.createElement('div');
     messageDiv.className = `message ${isUser ? 'user' : 'ai'}`;
 
@@ -127,217 +239,49 @@ function addMessage(content, isUser) {
     avatar.className = 'message-avatar';
     avatar.innerHTML = isUser ? '<i class="fas fa-user"></i>' : '<i class="fas fa-robot"></i>';
 
-    const messageContent = document.createElement('div');
-    messageContent.className = 'message-content';
-    messageContent.textContent = content;
+    const content = document.createElement('div');
+    content.className = 'message-content';
+    content.textContent = text;
 
     messageDiv.appendChild(avatar);
-    messageDiv.appendChild(messageContent);
+    messageDiv.appendChild(content);
+    chatMessages.appendChild(messageDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
 
-    chatArea.appendChild(messageDiv);
-    chatArea.scrollTop = chatArea.scrollHeight;
-
-    messages.push({ content, isUser });
-}
-
-function getAIResponse() {
-    return aiResponses[Math.floor(Math.random() * aiResponses.length)];
-}
-
-function transitionToChat() {
-    welcomeContainer.classList.add('hidden');
-    chatContainer.classList.add('active');
-    messageInput.focus();
-}
-
-function sendMessage(inputElement) {
-    const message = inputElement.value.trim();
-    if (message === '') return;
-
-    if (isFirstMessage) {
-        transitionToChat();
-        isFirstMessage = false;
-
-        const sessionTitle = message.length > 40 ? message.substring(0, 40) + '...' : message;
-        chatSessions.unshift({
-            title: sessionTitle,
-            timestamp: new Date(),
-            messages: []
-        });
-        updateChatHistory();
+    if (saveToHistory) {
+        updateConversationMessages(text, isUser);
     }
+}
+
+function sendMessage(input) {
+    const message = input.value.trim();
+    if (!message) return;
+
+    const isNewConversation = !currentConversationId;
+
+    if (isNewConversation) {
+        saveConversation(message);
+    }
+
+    welcomeScreen.classList.add('hidden');
+    chatScreen.classList.add('active');
 
     addMessage(message, true);
-
-    if (chatSessions.length > 0) {
-        chatSessions[0].messages.push({ content: message, isUser: true });
-    }
-
-    inputElement.value = '';
+    input.value = '';
 
     setTimeout(() => {
-        const aiResponse = getAIResponse();
-        addMessage(aiResponse, false);
-
-        if (chatSessions.length > 0) {
-            chatSessions[0].messages.push({ content: aiResponse, isUser: false });
-        }
+        const response = aiResponses[Math.floor(Math.random() * aiResponses.length)];
+        addMessage(response, false);
     }, 800);
 }
 
-function updateChatHistory() {
-    chatHistoryList.innerHTML = '';
-
-    chatSessions.forEach((session, index) => {
-        const historyItem = document.createElement('div');
-        historyItem.className = 'chat-history-item';
-        historyItem.innerHTML = `<span>${session.title}</span>`;
-        historyItem.addEventListener('click', () => {
-            loadChatSession(index);
-            if (window.innerWidth <= 768) {
-                sidebar.classList.remove('open');
-                sidebarOverlay.classList.remove('active');
-            }
-        });
-        chatHistoryList.appendChild(historyItem);
-    });
-}
-
-function loadChatSession(index) {
-    const session = chatSessions[index];
-    chatArea.innerHTML = '';
-    messages = [];
-
-    session.messages.forEach(msg => {
-        addMessage(msg.content, msg.isUser);
-    });
-
-    if (session.messages.length > 0) {
-        welcomeContainer.classList.add('hidden');
-        chatContainer.classList.add('active');
-    }
-}
-
-centeredSendButton.addEventListener('click', () => {
-    sendMessage(centeredMessageInput);
+// Event listeners for sending messages
+welcomeSendBtn.addEventListener('click', () => sendMessage(welcomeInput));
+welcomeInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') sendMessage(welcomeInput);
 });
 
-centeredMessageInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        sendMessage(centeredMessageInput);
-    }
+chatSendBtn.addEventListener('click', () => sendMessage(chatInput));
+chatInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') sendMessage(chatInput);
 });
-
-sendButton.addEventListener('click', () => {
-    sendMessage(messageInput);
-});
-
-messageInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        sendMessage(messageInput);
-    }
-});
-
-newChatButton.addEventListener('click', () => {
-    messages = [];
-    isFirstMessage = true;
-    chatArea.innerHTML = '';
-    chatContainer.classList.remove('active');
-    welcomeContainer.classList.remove('hidden');
-    centeredMessageInput.value = '';
-    messageInput.value = '';
-    centeredMessageInput.focus();
-
-    if (window.innerWidth <= 768) {
-        sidebar.classList.remove('open');
-        sidebarOverlay.classList.remove('active');
-    }
-});
-
-footerSettingsButton.addEventListener('click', () => {
-    alert('إعدادات الحساب\n\n• الملف الشخصي\n• الاشتراكات\n• الإعدادات\n• تسجيل الخروج');
-
-    if (window.innerWidth <= 768) {
-        sidebar.classList.remove('open');
-        sidebarOverlay.classList.remove('active');
-    }
-});
-
-footerUserInfo.addEventListener('click', (e) => {
-    if (e.target.closest('.footer-settings-btn')) return;
-
-    alert('معلومات الحساب\n\nالاسم: محمد أحمد\nالبريد: mohammed@example.com\n\nانقر على أيقونة الإعدادات لتعديل معلوماتك');
-
-    if (window.innerWidth <= 768) {
-        sidebar.classList.remove('open');
-        sidebarOverlay.classList.remove('active');
-    }
-});
-
-formsButton.addEventListener('click', () => {
-    formsSubmenu.classList.toggle('active');
-});
-
-contractsButton.addEventListener('click', () => {
-    alert('فتح صفحة العقود');
-    if (window.innerWidth <= 768) {
-        sidebar.classList.remove('open');
-        sidebarOverlay.classList.remove('active');
-    }
-});
-
-risksButton.addEventListener('click', () => {
-    alert('فتح صفحة المخاطر');
-    if (window.innerWidth <= 768) {
-        sidebar.classList.remove('open');
-        sidebarOverlay.classList.remove('active');
-    }
-});
-
-searchInput.addEventListener('input', (e) => {
-    const searchTerm = e.target.value.toLowerCase();
-    const chatItems = chatHistoryList.querySelectorAll('.chat-history-item');
-
-    chatItems.forEach(item => {
-        const text = item.textContent.toLowerCase();
-        if (text.includes(searchTerm)) {
-            item.style.display = 'flex';
-        } else {
-            item.style.display = 'none';
-        }
-    });
-});
-
-function expandSidebarAndClick(callback) {
-    if (isSidebarCollapsed) {
-        isSidebarCollapsed = false; // update state
-        sidebar.classList.remove('collapsed');
-        sidebarToggle.classList.remove('collapsed');
-        const icon = sidebarToggle.querySelector('i');
-        icon.className = 'fas fa-bars';
-    }
-    setTimeout(callback, 300);
-}
-
-collapsedNewChat.addEventListener('click', () => {
-    expandSidebarAndClick(() => newChatButton.click());
-});
-
-collapsedSearch.addEventListener('click', () => {
-    expandSidebarAndClick(() => searchInput.focus());
-});
-
-collapsedForms.addEventListener('click', () => {
-    expandSidebarAndClick(() => formsButton.click());
-});
-
-collapsedHistory.addEventListener('click', () => {
-    expandSidebarAndClick(() => { });
-});
-
-collapsedSettings.addEventListener('click', () => {
-    expandSidebarAndClick(() => footerSettingsButton.click());
-});
-
-
-centeredMessageInput.focus();
