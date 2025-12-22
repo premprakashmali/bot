@@ -17,7 +17,7 @@
 
         body {
             font-family: 'Cairo', sans-serif;
-            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1729 100%);
+            background: linear-gradient(135deg, #1a1f2e 0%, #0f141f 50%, #1a1f2e 100%);
             height: 100vh;
             display: flex;
             align-items: center;
@@ -32,12 +32,12 @@
             position: absolute;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(0, 194, 255, 0.15) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
             border-radius: 50%;
             top: -200px;
             right: -200px;
             animation: pulse 8s ease-in-out infinite;
-            filter: blur(60px);
+            filter: blur(80px);
         }
 
         body::after {
@@ -45,12 +45,12 @@
             position: absolute;
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(255, 215, 0, 0.12) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.06) 0%, transparent 70%);
             border-radius: 50%;
             bottom: -150px;
             left: -150px;
             animation: pulse 6s ease-in-out infinite reverse;
-            filter: blur(60px);
+            filter: blur(80px);
         }
 
         @keyframes pulse {
@@ -91,22 +91,75 @@
             justify-content: center;
             gap: 12px;
             margin-bottom: 25px;
+            animation: logoBounce 3s ease-in-out infinite;
         }
 
         .logo i {
             font-size: 36px;
-            color: #00c2ff;
-            filter: drop-shadow(0 0 20px rgba(0, 194, 255, 0.8));
-            animation: neonGlow 2s ease-in-out infinite alternate;
+            color: #d4af37;
+            filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.6));
+            animation: neonGlow 3s ease-in-out infinite;
+        }
+
+        .logo h1 {
+            font-size: 42px;
+            color: white;
+            font-weight: 800;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            animation: textGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes logoBounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            25% {
+                transform: translateY(-10px);
+            }
+
+            50% {
+                transform: translateY(0);
+            }
+
+            75% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes neonGlow {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.6));
+            }
+
+            50% {
+                filter: drop-shadow(0 0 35px rgba(212, 175, 55, 1));
+            }
+        }
+
+        @keyframes textGlow {
+
+            0%,
+            100% {
+                text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            }
+
+            50% {
+                text-shadow: 0 0 30px rgba(212, 175, 55, 0.7), 0 0 40px rgba(212, 175, 55, 0.5);
+            }
         }
 
         @keyframes neonGlow {
             from {
-                filter: drop-shadow(0 0 20px rgba(0, 194, 255, 0.8));
+                filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.6));
             }
 
             to {
-                filter: drop-shadow(0 0 30px rgba(0, 194, 255, 1));
+                filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.9));
             }
         }
 
@@ -114,13 +167,7 @@
             font-size: 42px;
             color: white;
             font-weight: 800;
-            text-shadow: 0 0 20px rgba(0, 194, 255, 0.5);
-        }
-
-        .logo h1 {
-            font-size: 42px;
-            color: white;
-            font-weight: 800;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
         }
 
         .title {
@@ -128,7 +175,7 @@
             color: white;
             font-weight: 700;
             margin-bottom: 10px;
-            text-shadow: 0 0 15px rgba(0, 194, 255, 0.3);
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
         }
 
         .subtitle {
@@ -168,18 +215,18 @@
         }
 
         .btn-login {
-            background: rgba(0, 194, 255, 0.1);
-            color: #00c2ff;
-            border: 2px solid #00c2ff;
+            background: rgba(212, 175, 55, 0.1);
+            color: #d4af37;
+            border: 2px solid #d4af37;
             backdrop-filter: blur(10px);
-            box-shadow: 0 0 20px rgba(0, 194, 255, 0.3);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
         }
 
         .btn-login:hover {
-            background: rgba(0, 194, 255, 0.2);
-            border-color: #00c2ff;
+            background: rgba(212, 175, 55, 0.2);
+            border-color: #d4af37;
             transform: translateY(-2px);
-            box-shadow: 0 0 30px rgba(0, 194, 255, 0.6);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
         }
 
         .features {
@@ -192,9 +239,9 @@
         }
 
         .feature-card {
-            background: rgba(0, 194, 255, 0.05);
+            background: rgba(212, 175, 55, 0.03);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(0, 194, 255, 0.2);
+            border: 1px solid rgba(212, 175, 55, 0.15);
             border-radius: 16px;
             padding: 25px;
             transition: all 0.3s ease;
@@ -206,10 +253,10 @@
         }
 
         .feature-card:hover {
-            background: rgba(0, 194, 255, 0.1);
-            border-color: rgba(0, 194, 255, 0.5);
+            background: rgba(212, 175, 55, 0.08);
+            border-color: rgba(212, 175, 55, 0.3);
             transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(0, 194, 255, 0.3), 0 0 30px rgba(0, 194, 255, 0.2);
+            box-shadow: 0 12px 40px rgba(212, 175, 55, 0.2), 0 0 30px rgba(212, 175, 55, 0.1);
         }
 
         .feature-header {
@@ -223,20 +270,20 @@
         .feature-icon {
             width: 42px;
             height: 42px;
-            background: linear-gradient(135deg, rgba(0, 194, 255, 0.2) 0%, rgba(0, 194, 255, 0.3) 100%);
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.25) 100%);
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            box-shadow: 0 0 20px rgba(0, 194, 255, 0.4);
-            border: 1px solid rgba(0, 194, 255, 0.3);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            border: 1px solid rgba(212, 175, 55, 0.25);
         }
 
         .feature-icon i {
             font-size: 20px;
-            color: #00c2ff;
-            filter: drop-shadow(0 0 5px rgba(0, 194, 255, 0.8));
+            color: #d4af37;
+            filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.6));
         }
 
         .feature-title {
@@ -291,7 +338,7 @@
         }
 
         .modal-content {
-            background: linear-gradient(135deg, rgba(10, 14, 39, 0.98) 0%, rgba(26, 31, 58, 0.95) 100%);
+            background: linear-gradient(135deg, rgba(26, 31, 46, 0.98) 0%, rgba(15, 20, 31, 0.95) 100%);
             backdrop-filter: blur(20px);
             border-radius: 20px;
             padding: 40px;
@@ -300,8 +347,8 @@
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 194, 255, 0.2);
-            border: 1px solid rgba(0, 194, 255, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.2);
             animation: slideUp 0.4s ease;
         }
 
@@ -310,17 +357,17 @@
         }
 
         .modal-content::-webkit-scrollbar-track {
-            background: rgba(0, 194, 255, 0.1);
+            background: rgba(212, 175, 55, 0.05);
             border-radius: 10px;
         }
 
         .modal-content::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #00c2ff 0%, #0099cc 100%);
+            background: linear-gradient(135deg, #d4af37 0%, #b8941f 100%);
             border-radius: 10px;
         }
 
         .modal-content::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #00d4ff 0%, #00aadd 100%);
+            background: linear-gradient(135deg, #e0c050 0%, #c9a534 100%);
         }
 
         @keyframes slideUp {
@@ -339,10 +386,10 @@
             position: sticky;
             top: 0;
             left: 0;
-            background: rgba(0, 194, 255, 0.15);
-            border: 1px solid rgba(0, 194, 255, 0.3);
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.25);
             font-size: 28px;
-            color: #00c2ff;
+            color: #d4af37;
             cursor: pointer;
             width: 35px;
             height: 35px;
@@ -356,18 +403,18 @@
         }
 
         .modal-close:hover {
-            background: rgba(0, 194, 255, 0.25);
-            color: #00c2ff;
-            box-shadow: 0 0 15px rgba(0, 194, 255, 0.5);
+            background: rgba(212, 175, 55, 0.2);
+            color: #d4af37;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
         }
 
         .modal-title {
             font-size: 24px;
             font-weight: 700;
-            color: #00c2ff;
+            color: #d4af37;
             margin-bottom: 20px;
             text-align: center;
-            text-shadow: 0 0 20px rgba(0, 194, 255, 0.5);
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
         }
 
         .user-categories {
@@ -378,8 +425,8 @@
         }
 
         .category-btn {
-            background: rgba(0, 194, 255, 0.05);
-            border: 2px solid rgba(0, 194, 255, 0.2);
+            background: rgba(212, 175, 55, 0.03);
+            border: 2px solid rgba(212, 175, 55, 0.15);
             border-radius: 12px;
             padding: 20px;
             cursor: pointer;
@@ -391,22 +438,22 @@
         }
 
         .category-btn:hover {
-            background: rgba(0, 194, 255, 0.1);
-            border-color: #00c2ff;
+            background: rgba(212, 175, 55, 0.08);
+            border-color: #d4af37;
             transform: translateX(-5px);
-            box-shadow: 0 5px 25px rgba(0, 194, 255, 0.4), 0 0 30px rgba(0, 194, 255, 0.2);
+            box-shadow: 0 5px 25px rgba(212, 175, 55, 0.3), 0 0 30px rgba(212, 175, 55, 0.15);
         }
 
         .category-icon {
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, #00c2ff 0%, #0099cc 100%);
+            background: linear-gradient(135deg, #d4af37 0%, #b8941f 100%);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            box-shadow: 0 0 20px rgba(0, 194, 255, 0.5);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
         }
 
         .category-icon i {
@@ -422,9 +469,9 @@
         .category-title {
             font-size: 18px;
             font-weight: 700;
-            color: #00c2ff;
+            color: #d4af37;
             margin-bottom: 5px;
-            text-shadow: 0 0 10px rgba(0, 194, 255, 0.3);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
         }
 
         .category-desc {
@@ -450,7 +497,7 @@
             display: block;
             font-size: 14px;
             font-weight: 600;
-            color: #00c2ff;
+            color: #d4af37;
             margin-bottom: 8px;
             text-align: right;
         }
@@ -458,20 +505,20 @@
         .form-input {
             width: 100%;
             padding: 12px 15px;
-            border: 2px solid rgba(0, 194, 255, 0.3);
+            border: 2px solid rgba(212, 175, 55, 0.2);
             border-radius: 10px;
             font-size: 15px;
             font-family: 'Cairo', sans-serif;
             transition: all 0.3s ease;
             text-align: right;
-            background: rgba(0, 194, 255, 0.05);
+            background: rgba(212, 175, 55, 0.03);
             color: white;
         }
 
         .form-input:focus {
             outline: none;
-            border-color: #00c2ff;
-            box-shadow: 0 0 0 3px rgba(0, 194, 255, 0.2), 0 0 20px rgba(0, 194, 255, 0.3);
+            border-color: #d4af37;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15), 0 0 20px rgba(212, 175, 55, 0.2);
         }
 
         .form-input::placeholder {
@@ -486,8 +533,8 @@
         }
 
         .payment-card {
-            background: rgba(0, 194, 255, 0.05);
-            border: 2px solid rgba(0, 194, 255, 0.2);
+            background: rgba(212, 175, 55, 0.03);
+            border: 2px solid rgba(212, 175, 55, 0.15);
             border-radius: 12px;
             padding: 14px;
             cursor: pointer;
@@ -498,14 +545,14 @@
         }
 
         .payment-card:hover {
-            background: rgba(0, 194, 255, 0.1);
-            border-color: #00c2ff;
+            background: rgba(212, 175, 55, 0.08);
+            border-color: #d4af37;
             transform: translateX(-3px);
-            box-shadow: 0 3px 20px rgba(0, 194, 255, 0.3);
+            box-shadow: 0 3px 20px rgba(212, 175, 55, 0.2);
         }
 
         .payment-card.selected {
-            background: rgba(0, 194, 255, 0.15);
+            background: rgba(212, 175, 55, 0.12);
             border-color: #ffd700;
             box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
         }
@@ -513,13 +560,13 @@
         .payment-icon {
             width: 40px;
             height: 40px;
-            background: linear-gradient(135deg, #00c2ff 0%, #0099cc 100%);
+            background: linear-gradient(135deg, #d4af37 0%, #b8941f 100%);
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            box-shadow: 0 0 15px rgba(0, 194, 255, 0.4);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
         }
 
         .payment-icon i {
@@ -535,7 +582,7 @@
         .payment-name {
             font-size: 15px;
             font-weight: 700;
-            color: #00c2ff;
+            color: #d4af37;
             margin-bottom: 2px;
         }
 
@@ -581,23 +628,23 @@
         }
 
         .form-btn-secondary {
-            background: rgba(0, 194, 255, 0.1);
-            color: #00c2ff;
-            border: 2px solid rgba(0, 194, 255, 0.3);
+            background: rgba(212, 175, 55, 0.1);
+            color: #d4af37;
+            border: 2px solid rgba(212, 175, 55, 0.3);
         }
 
         .form-btn-secondary:hover {
-            background: rgba(0, 194, 255, 0.2);
-            border-color: #00c2ff;
+            background: rgba(212, 175, 55, 0.2);
+            border-color: #d4af37;
         }
 
         .back-btn {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(0, 194, 255, 0.1);
-            border: 1px solid rgba(0, 194, 255, 0.3);
-            color: #00c2ff;
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            color: #d4af37;
             cursor: pointer;
             font-size: 13px;
             font-family: 'Cairo', sans-serif;
@@ -608,9 +655,9 @@
         }
 
         .back-btn:hover {
-            background: rgba(0, 194, 255, 0.2);
-            border-color: #00c2ff;
-            box-shadow: 0 0 15px rgba(0, 194, 255, 0.3);
+            background: rgba(212, 175, 55, 0.15);
+            border-color: #d4af37;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
         }
 
         @media (max-width: 768px) {
@@ -652,7 +699,7 @@
         <div class="header">
             <div class="logo">
                 <i class="fas fa-balance-scale"></i>
-                <h1>بيّنة</h1>
+                <h1>بيِّنة</h1>
             </div>
             <div class="title">بيّنة: الذكاء القانوني الأسرع والأدق</div>
             <div class="subtitle">شريك القانوني الذكي.. دقة أعلى، وسرعة فائقة</div>
@@ -666,20 +713,9 @@
             <div class="feature-card">
                 <div class="feature-header">
                     <div class="feature-icon">
-                        <i class="fas fa-comments"></i>
+                        <i class="fas fa-book"></i>
                     </div>
-                    <div class="feature-title">الاستشارات القانونية</div>
-                </div>
-                <div class="feature-description">احصل على استشارات قانونية احترافية فورية بأعلى مستوى من الدقة
-                    والاحترافية</div>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-header">
-                    <div class="feature-icon">
-                        <i class="fas fa-file-contract"></i>
-                    </div>
-                    <div class="feature-title">التحليل القانوني للوثائق</div>
+                    <div class="feature-title">التأصيل القانوني الموثق</div>
                 </div>
                 <div class="feature-description">قراءة وتحليل المستندات بدقة عالية لمراجعة العقود والمستندات وإيجاد
                     الثغرات المحتملة</div>
@@ -688,12 +724,12 @@
             <div class="feature-card">
                 <div class="feature-header">
                     <div class="feature-icon">
-                        <i class="fas fa-search"></i>
+                        <i class="fas fa-comments"></i>
                     </div>
-                    <div class="feature-title">البحث القانوني المتقدم</div>
+                    <div class="feature-title">الاستشارة القانونية</div>
                 </div>
-                <div class="feature-description">خدمات بحثية متخصصة لإيجاد سوابق قضائية وقوانين تتناسب مع احتياجاتك
-                </div>
+                <div class="feature-description">احصل على استشارات قانونية احترافية فورية بأعلى مستوى من الدقة
+                    والاحترافية</div>
             </div>
 
             <div class="feature-card">
@@ -705,6 +741,17 @@
                 </div>
                 <div class="feature-description">إعداد مذكرات ووثائق وعقود باحترافية عالية وفق القوانين والتشريعات
                     المحلية</div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-header">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="feature-title">البحث القانوني المتقدم</div>
+                </div>
+                <div class="feature-description">خدمات بحثية متخصصة لإيجاد سوابق قضائية وقوانين تتناسب مع احتياجاتك
+                </div>
             </div>
         </div>
 
@@ -762,16 +809,21 @@
 
             <form class="login-form active" onsubmit="handleLogin(event)">
                 <div class="form-group">
+                    <label class="form-label">الاسم المستعار</label>
+                    <input type="text" class="form-input" id="username" placeholder="أدخل اسمك المستعار" required>
+                </div>
+
+                <div class="form-group">
                     <label class="form-label">البريد الإلكتروني</label>
-                    <input type="email" class="form-input" placeholder="example@email.com" required>
+                    <input type="email" class="form-input" id="email" placeholder="example@email.com" required>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">كلمة المرور</label>
-                    <input type="password" class="form-input" placeholder="••••••••" required>
+                    <input type="password" class="form-input" id="password" placeholder="••••••••" required>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" id="paymentSection" style="display: none;">
                     <label class="form-label">اختر طريقة الدفع</label>
                     <div class="payment-methods">
                         <div class="payment-card" onclick="selectPayment(this, 'credit-card')">
@@ -824,11 +876,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="form-actions">
-                    <button type="submit" class="form-btn form-btn-primary" id="submitBtn" disabled>متابعة</button>
-                </div>
+                    <div class="form-actions">
+                        <button type="submit" class="form-btn form-btn-primary" id="submitBtn" disabled>متابعة</button>
+                    </div>
             </form>
         </div>
     </div>
@@ -864,7 +915,19 @@
 
             setTimeout(() => {
                 const loginTitle = document.getElementById('loginTitle');
-                loginTitle.textContent = isTrialMode ? `تجربة مجانية - ${category}` : `تسجيل الدخول - ${category}`;
+                const paymentSection = document.getElementById('paymentSection');
+
+                // Show payment section only if NOT in trial mode
+                if (isTrialMode) {
+                    loginTitle.textContent = `تجربة مجانية - ${category}`;
+                    paymentSection.style.display = 'none';
+                    document.getElementById('submitBtn').disabled = false; // Enable button for trial
+                } else {
+                    loginTitle.textContent = `تسجيل الدخول - ${category}`;
+                    paymentSection.style.display = 'block';
+                    document.getElementById('submitBtn').disabled = true; // Require payment selection
+                }
+
                 document.getElementById('loginModal').classList.add('active');
             }, 300);
         }
@@ -896,7 +959,8 @@
         function handleLogin(event) {
             event.preventDefault();
 
-            if (!selectedPaymentMethod) {
+            // Only check for payment method if NOT in trial mode
+            if (!isTrialMode && !selectedPaymentMethod) {
                 alert('الرجاء اختيار طريقة الدفع');
                 return;
             }
@@ -910,10 +974,15 @@
                 'google-pay': 'Google Pay'
             };
 
-            alert(`مرحباً بك! جاري ${mode} كـ ${selectedCategory}\nطريقة الدفع: ${paymentNames[selectedPaymentMethod]}`);
+            let message = `مرحباً بك! جاري ${mode} كـ ${selectedCategory}`;
+            if (!isTrialMode) {
+                message += `\nطريقة الدفع: ${paymentNames[selectedPaymentMethod]}`;
+            }
+
+            alert(message);
 
             sessionStorage.setItem('userCategory', selectedCategory);
-            sessionStorage.setItem('paymentMethod', selectedPaymentMethod);
+            sessionStorage.setItem('paymentMethod', selectedPaymentMethod || 'none');
             sessionStorage.setItem('isTrialMode', isTrialMode);
 
             window.location.href = 'index.html';
