@@ -756,7 +756,7 @@
         </div>
 
         <!-- <div class="footer">
-            <p>منصة بيّنة للذكاء القانوني | جميع الحقوق محفوظة © 2024</p>
+            <p>منصة بيّنة للذكاء القانوني | جميع الحقوق محفوظة © 2025</p>
         </div> -->
     </div>
 
@@ -823,6 +823,31 @@
                     <input type="password" class="form-input" id="password" placeholder="••••••••" required>
                 </div>
 
+                <div class="form-group" id="socialLoginSection">
+                    <label class="form-label">أو سجل الدخول باستخدام</label>
+                    <div class="payment-methods">
+                        <div class="payment-card" onclick="socialLogin('google')">
+                            <div class="payment-icon">
+                                <i class="fab fa-google"></i>
+                            </div>
+                            <div class="payment-info">
+                                <div class="payment-name">تسجيل الدخول بحساب Google</div>
+                                <div class="payment-desc">استخدم حساب Google الخاص بك</div>
+                            </div>
+                        </div>
+
+                        <div class="payment-card" onclick="socialLogin('apple')">
+                            <div class="payment-icon">
+                                <i class="fab fa-apple"></i>
+                            </div>
+                            <div class="payment-info">
+                                <div class="payment-name">تسجيل الدخول بحساب Apple</div>
+                                <div class="payment-desc">استخدم Apple ID الخاص بك</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="form-group" id="paymentSection" style="display: none;">
                     <label class="form-label">اختر طريقة الدفع</label>
                     <div class="payment-methods">
@@ -836,26 +861,6 @@
                             </div>
                         </div>
 
-                        <div class="payment-card" onclick="selectPayment(this, 'paypal')">
-                            <div class="payment-icon">
-                                <i class="fab fa-paypal"></i>
-                            </div>
-                            <div class="payment-info">
-                                <div class="payment-name">PayPal</div>
-                                <div class="payment-desc">الدفع عبر حساب PayPal</div>
-                            </div>
-                        </div>
-
-                        <div class="payment-card" onclick="selectPayment(this, 'bank-transfer')">
-                            <div class="payment-icon">
-                                <i class="fas fa-university"></i>
-                            </div>
-                            <div class="payment-info">
-                                <div class="payment-name">تحويل بنكي</div>
-                                <div class="payment-desc">التحويل المباشر من البنك</div>
-                            </div>
-                        </div>
-
                         <div class="payment-card" onclick="selectPayment(this, 'apple-pay')">
                             <div class="payment-icon">
                                 <i class="fab fa-apple-pay"></i>
@@ -865,21 +870,12 @@
                                 <div class="payment-desc">الدفع عبر Apple Pay</div>
                             </div>
                         </div>
-
-                        <div class="payment-card" onclick="selectPayment(this, 'google-pay')">
-                            <div class="payment-icon">
-                                <i class="fab fa-google-pay"></i>
-                            </div>
-                            <div class="payment-info">
-                                <div class="payment-name">Google Pay</div>
-                                <div class="payment-desc">الدفع عبر Google Pay</div>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="form-actions">
                         <button type="submit" class="form-btn form-btn-primary" id="submitBtn" disabled>متابعة</button>
                     </div>
+                </div>
             </form>
         </div>
     </div>
@@ -917,15 +913,14 @@
                 const loginTitle = document.getElementById('loginTitle');
                 const paymentSection = document.getElementById('paymentSection');
 
-                // Show payment section only if NOT in trial mode
                 if (isTrialMode) {
                     loginTitle.textContent = `تجربة مجانية - ${category}`;
                     paymentSection.style.display = 'none';
-                    document.getElementById('submitBtn').disabled = false; // Enable button for trial
+                    document.getElementById('submitBtn').disabled = false; 
                 } else {
                     loginTitle.textContent = `تسجيل الدخول - ${category}`;
                     paymentSection.style.display = 'block';
-                    document.getElementById('submitBtn').disabled = true; // Require payment selection
+                    document.getElementById('submitBtn').disabled = true; 
                 }
 
                 document.getElementById('loginModal').classList.add('active');
@@ -1002,3 +997,5 @@
 </body>
 
 </html>
+
+
